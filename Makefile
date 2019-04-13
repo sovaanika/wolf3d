@@ -1,6 +1,6 @@
 NAME = wolf3d
 SRCSFOLDER = ./srcs/
-SRCS = main.c draw.c validation.c
+SRCS = main.c draw.c validation.c raycast.c
 OBJNAME = $(SRCS:.c=.o)
 OBJDIR = ./obj/
 OBJ = $(addprefix $(OBJDIR),$(OBJNAME))
@@ -11,7 +11,7 @@ LIBFTFOLDER = ./libft/
 LIBFTINCLUDES = $(LIBFTFOLDER)
 LIBFTINK = -I $(LIBFTINCLUDES) -L $(LIBFTFOLDER) -lft
 
-MLXLINTMACOS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLXLINTMACOS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lSDL
 
 all: $(NAME)
 

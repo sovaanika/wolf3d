@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 18:34:52 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/09 17:52:13 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/13 20:05:14 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <unistd.h>
 # include "libft/includes/libft.h"
+# include "SDL2.framework/Headers/SDL.h"
+# include "SDL2.framework/Headers/SDL_keycode.h"
+# include "SDL2.framework/Headers/SDL_opengl.h"
+# include "SDL2.framework/Headers/SDL_events.h"
 
 typedef struct	s_point
 {
@@ -29,6 +34,25 @@ typedef struct	s_point
 	double		z;
 	//int			color;
 }				t_point;
+
+typedef struct	s_dda
+{
+	float		x1;
+	float		y1;
+	float		x2;
+	float		y2;
+	int			ix1;
+	int			ix2;
+	int			iy1;
+	int			iy2;
+	int			delx;
+	int			dely;
+	int			len;
+	double		dx;
+	double		dy;
+	double		x;
+	double		y;
+}				t_dda;
 
 typedef struct	s_wolf
 {
@@ -45,6 +69,7 @@ typedef struct	s_wolf
 	int			sizey;
 	int			textusz;
 	t_point		**map;
+	t_dda		d;
 }				t_wolf;
 
 void			init(t_wolf *w);

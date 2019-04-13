@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:56:33 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/09 17:52:36 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/11 17:52:44 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	second_split(char **arrn, t_wolf *w)
 		{
 			//elem = ft_strsplit(arrfin[x], ',');
 			map[y][x].z = (double)(ft_atoi(arrfin[x]) * w->textusz);
+			//printf("%d %d %f\n", y, x, map[y][x].z);
 			//map[y][x].color = ft_atoi_base(elem[1]);
 			//free(elem);
 		}
@@ -121,8 +122,8 @@ void	putcords(t_wolf *w)
 		x = -1;
 		while (++x < w->sizex)
 		{
-			map[y][x].x = (double)(x * 64);//w->cell);
-			map[y][x].y = (double)(y * 64);//w->cell);
+			map[y][x].x = (double)(x) * 64;//w->cell);
+			map[y][x].y = (double)(y) * 64;//w->cell);
 		}
 	}
 }

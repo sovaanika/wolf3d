@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:47:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/09 18:01:19 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/11 19:57:38 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init(t_wolf *w)
 {
 	w->mlx_ptr = mlx_init();
 	w->wid = 1200;
+	w->textusz = 1;
 	w->hei = 1200;
 	w->win_ptr = mlx_new_window(w->mlx_ptr, w->wid, w->hei, "wolf");
 	w->img_ptr = mlx_new_image(w->mlx_ptr, w->wid, w->hei);
@@ -39,21 +40,21 @@ void	init(t_wolf *w)
 	&w->size_l, &w->end);
 }
 
-int		main(int argc, char **argv)
-{
-	t_wolf	*w;
-	int		fd;
+// int		main(int argc, char **argv)
+// {
+// 	t_wolf	*w;
+// 	int		fd;
 
-	if (argc == 2)
-	{
-		fd = open(argv[1], O_RDONLY);
-		//here will be true validation
-		w = (t_wolf *)malloc(sizeof(*w));
-		init(w);
-		validation(w, fd);
-		draw(w);
-		mlx_key_hook(w->win_ptr, key_press, (void *)w);
-		mlx_hook(w->win_ptr, 17, 0, ft_close, (void *)0);
-		mlx_loop(w->mlx_ptr);
-	}
-}
+// 	if (argc == 2)
+// 	{
+// 		fd = open(argv[1], O_RDONLY);
+// 		//here will be true validation
+// 		w = (t_wolf *)malloc(sizeof(*w));
+// 		init(w);
+// 		validation(w, fd);
+// 		draw(w);
+// 		mlx_key_hook(w->win_ptr, key_press, (void *)w);
+// 		mlx_hook(w->win_ptr, 17, 0, ft_close, (void *)0);
+// 		mlx_loop(w->mlx_ptr);
+// 	}
+// }
