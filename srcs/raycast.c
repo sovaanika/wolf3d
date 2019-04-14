@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:47:47 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/11 19:51:30 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/14 19:06:01 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int main(int argc, char **argv)
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
-	screen(512, 384, 0, "Raycaster");
-	while(!done())
-	{
+	//screen(512, 384, 0, "Raycaster");
+	// while(!done())
+	// {
 		for(int x = 0; x < w; x++)
 		{
 	  //calculate ray position and direction
@@ -44,8 +44,8 @@ int main(int argc, char **argv)
 			double sideDistY;
 
 	   //length of ray from one x or y-side to next x or y-side
-			double deltaDistX = abs(1 / rayDirX);
-			double deltaDistY = abs(1 / rayDirY);
+			double deltaDistX = fabs(1 / rayDirX);
+			double deltaDistY = fabs(1 / rayDirY);
 			double perpWallDist;
 
 	  //what direction to step in x or y-direction (either +1 or -1)
@@ -120,11 +120,14 @@ int main(int argc, char **argv)
 				case 2:  color = 0x0000FF00;  break; //green
 				case 3:  color = 0x000000FF;   break; //blue
 				case 4:  color = 127637638;  break; //white
-				default: color = 3874989998; break; //yellow
+				default: color = 3874988; break; //yellow
 			}
 
 	  //give x and y sides different brightness
-			if (side == 1) {color = color / 2;}
+			if (side == 1)
+			{
+				color = color / 2;
+			}
 
 	  //draw the pixels of the stripe as a vertical line
 			verLine(x, drawStart, drawEnd, color);
@@ -133,49 +136,50 @@ int main(int argc, char **argv)
 		oldTime = time;
 		time = getTicks();
 		double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-		print(1.0 / frameTime); //FPS counter
+		printf("%d\n", 1.0 / frameTime); //FPS counter
 		redraw();
 		cls();
 
 	//speed modifiers
 		double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
 		double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
-		readKeys();
-	//move forward if no wall in front of you
-		if (keyDown(SDLK_UP))
-		{
-			if ((int)w->map[(int)(posX + dirX * moveSpeed)][(int)(posY)].z == 0)
-				posX += dirX * moveSpeed;
-			if ((int)w->map[(int)(posX)][(int)(posY + dirY * moveSpeed)].z == 0)
-				posY += dirY * moveSpeed;
-		}
+	// 	readKeys();
+	// //move forward if no wall in front of you
+	// 	if (keyDown(SDLK_UP))
+	// 	{
+	// 		if ((int)w->map[(int)(posX + dirX * moveSpeed)][(int)(posY)].z == 0)
+	// 			posX += dirX * moveSpeed;
+	// 		if ((int)w->map[(int)(posX)][(int)(posY + dirY * moveSpeed)].z == 0)
+	// 			posY += dirY * moveSpeed;
+	// 	}
 	//move backwards if no wall behind you
-		if (keyDown(SDLK_DOWN))
-		{
-			if ((int)w->map[(int)(posX - dirX * moveSpeed)][(int)(posY)].z == 0) posX -= dirX * moveSpeed;
-			if (w->map[(int)(posX)][(int)(posY - dirY * moveSpeed)].z == 0) posY -= dirY * moveSpeed;
-		}
-	//rotate to the right
-		if (keyDown(SDLK_RIGHT))
-		{
-	  //both camera direction and camera plane must be rotated
-			double oldDirX = dirX;
-			dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-			dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-			double oldPlaneX = planeX;
-			planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-			planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
-		}
-	//rotate to the left
-		if (keyDown(SDLK_LEFT))
-		{
-	  //both camera direction and camera plane must be rotated
-			double oldDirX = dirX;
-			dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-			dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-			double oldPlaneX = planeX;
-			planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-			planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
-		}
-	}
+	// 	if (keyDown(SDLK_DOWN))
+	// 	{
+	// 		if ((int)w->map[(int)(posX - dirX * moveSpeed)][(int)(posY)].z == 0) posX -= dirX * moveSpeed;
+	// 		if (w->map[(int)(posX)][(int)(posY - dirY * moveSpeed)].z == 0) posY -= dirY * moveSpeed;
+	// 	}
+	// //rotate to the right
+	// 	if (keyDown(SDLK_RIGHT))
+	// 	{
+	//   //both camera direction and camera plane must be rotated
+	// 		double oldDirX = dirX;
+	// 		dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+	// 		dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+	// 		double oldPlaneX = planeX;
+	// 		planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+	// 		planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	// 	}
+	// //rotate to the left
+	// 	if (keyDown(SDLK_LEFT))
+	// 	{
+	//   //both camera direction and camera plane must be rotated
+	// 		double oldDirX = dirX;
+	// 		dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+	// 		dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+	// 		double oldPlaneX = planeX;
+	// 		planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+	// 		planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+	// 	}
+	// }
+	mlx_loop(w->mlx_ptr);
 }
