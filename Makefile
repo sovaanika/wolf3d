@@ -1,39 +1,25 @@
 NAME = wolf3d
-SRCSFOLDER = ./srcs/
-SRCS = main.c draw.c validation.c raycast.c
-OBJNAME = $(SRCS:.c=.o)
-OBJDIR = ./obj/
-OBJ = $(addprefix $(OBJDIR),$(OBJNAME))
-INCLUDES = wolf.h
-GCCFLAG = -Wall -Wextra -Werror
+SRC = ./srcs/dda.c ./srcs/main.c ./srcs/raycaster.c ./srcs/validation.c
+INC = wolf.h
+LIBFTFOLDER = ./libft
+LIBFTINC = -I ./libft -L ./libft -lft
+FLAGS = -Wall -Wextra -Werror
 
-LIBFTFOLDER = ./libft/
-LIBFTINCLUDES = $(LIBFTFOLDER)
-LIBFTINK = -I $(LIBFTINCLUDES) -L $(LIBFTFOLDER) -lft
-
-MLXLINTMACOS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lSDL
+MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -framework OpenCL
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C $(LIBFTFOLDER)
-	gcc -g $(GCCFLAG) $(OBJ) $(MLXLINTMACOS) $(LIBFTINK) -o $(NAME)
+$(NAME): makelibft
+	gcc -g $(FLAGS) $(MLX) $(LIBFTINC) -I $(INC) $(SRC) -o $(NAME)
 
 clean:
-	@$(MAKE) -C $(LIBFTFOLDER) clean
-	rm -rf $(OBJDIR)
-	rm -rf *.o
+	make -C $(LIBFTFOLDER) clean
 
-fclean: clean
-	@$(MAKE) -C $(LIBFTFOLDER) fclean
-	rm -rf $(OBJDIR)
-	rm -rf $(NAME)
+fclean:
+	make -C $(LIBFTFOLDER) fclean
+	rm -f $(NAME)
 
-$(OBJDIR)%.o:$(SRCSFOLDER)%.c
-	@mkdir -p $(OBJDIR)
-	@gcc $(GCCFLAG) -I $(INCLUDES) -o $@ -c $<
+re: fclean all
 
-re:	fclean $(NAME)
-
-makeft:
-	@$(MAKE) -C $(LIBFTFOLDER)
+makelibft:
+	$(MAKE) -C $(LIBFTFOLDER)

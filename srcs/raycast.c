@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:47:47 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/14 19:06:01 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/15 18:11:12 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ int main(int argc, char **argv)
 	w = (t_wolf *)malloc(sizeof(*w));
 	int	fd = open(argv[1], O_RDONLY);
 	validation(w, fd);
-	init(w);
+	if (argc == 2)
+		init(w);
 	double posX = 22, posY = 12;  //x and y start position
 	double dirX = -1, dirY = 0; //initial direction vector
 	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 
-	double time = 0; //time of current frame
-	double oldTime = 0; //time of previous frame
+	//double time = 0; //time of current frame
+	//double oldTime = 0; //time of previous frame
 
 	//screen(512, 384, 0, "Raycaster");
 	// while(!done())
 	// {
-		for(int x = 0; x < w; x++)
+		for(int x = 0; x < w->wid; x++)
 		{
 	  //calculate ray position and direction
 			double cameraX = 2 * x / (double)(w->wid) - 1; //x-coordinate in camera space
@@ -130,19 +131,19 @@ int main(int argc, char **argv)
 			}
 
 	  //draw the pixels of the stripe as a vertical line
-			verLine(x, drawStart, drawEnd, color);
+			line_dda(x, drawStart, drawEnd, color, w);
 		}
 	//timing for input and FPS counter
-		oldTime = time;
-		time = getTicks();
-		double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-		printf("%d\n", 1.0 / frameTime); //FPS counter
-		redraw();
-		cls();
+		//oldTime = time;
+		//time = getTicks();
+		//double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
+		//printf("%d\n", 1.0 / frameTime); //FPS counter
+		//redraw();
+		//cls();
 
 	//speed modifiers
-		double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-		double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+		//double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
+		//double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
 	// 	readKeys();
 	// //move forward if no wall in front of you
 	// 	if (keyDown(SDLK_UP))

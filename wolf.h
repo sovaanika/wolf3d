@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 18:34:52 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/13 20:05:14 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/25 17:28:34 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,59 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "libft/includes/libft.h"
-# include "SDL2.framework/Headers/SDL.h"
-# include "SDL2.framework/Headers/SDL_keycode.h"
-# include "SDL2.framework/Headers/SDL_opengl.h"
-# include "SDL2.framework/Headers/SDL_events.h"
 
 typedef struct	s_point
 {
 	double		x;
 	double		y;
 	double		z;
-	//int			color;
+	int			color;
 }				t_point;
+
+typedef struct	s_direction
+{
+	double		x;
+	double		y;
+	double		rayx;
+	double		rayy;
+}				t_direction;
+
+typedef struct	s_position
+{
+	double		x;
+	double		y;
+}				t_position;
+
+typedef struct	s_plane
+{
+	double		x;
+	double		y;
+}				t_plane;
+
+typedef struct	s_camera
+{
+	double		x;
+	double		y;
+}				t_camera;
+
+typedef struct	s_distance
+{
+	double		x;
+	double		y;
+	double		deltax;
+	double		deltay;
+	double		perpwall;
+}				t_distance;
+
+typedef struct	s_bres
+{
+	double		delta[2];
+	double		xi;
+	double		yi;
+	double		d;
+	double		y;
+	double		x;
+}				t_bres;
 
 typedef struct	s_dda
 {
@@ -70,6 +111,20 @@ typedef struct	s_wolf
 	int			textusz;
 	t_point		**map;
 	t_dda		d;
+	t_direction	dir;
+	t_position	pos;
+	t_plane		plane;
+	t_camera	cam;
+	t_distance	dist;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int			mapx;
+	int			mapy;
+	int			linehei;
+	int			drwstrt;
+	int			drwend;
 }				t_wolf;
 
 void			init(t_wolf *w);
@@ -80,5 +135,8 @@ void			check_size(char **arrfin, t_wolf *w, int i);
 void			cleanarr(char **array);
 void			draw(t_wolf *w);
 void			putcords(t_wolf *w);
+void			line_dda(int x, int drawstart, int drawend, t_wolf *w);
+void			raycast(t_wolf *w);
+void			bresenham(t_wolf *w, double *x, double *y);
 
 #endif
