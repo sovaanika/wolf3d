@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 17:39:38 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/25 16:40:39 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/30 17:32:09 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 void	draw(t_wolf *w)
 {
-	// int		y;
-	// int		x;
+	int		x;
+	int		y;
 
-	// y = -1;
-	// while (++y < w->sizey)
-	// {
-	// 	x = -1;
-	// 	while (++x < w->sizex)
-	// 	{
-	// 		w->data[x + y * w->wid + 100] = (w->map[y][x].z * 10) * 122255;
-	// 	}
-	// }
+	mlx_clear_window(w->mlx_ptr, w->win_ptr);
+	x = -1;
+	while (++x < w->wid)
+	{
+		y = -1;
+		while (++y < w->hei)
+		{
+			w->data[y * w->wid + x] = 0;
+		}
+	}
 	raycast(w);
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, w->img_ptr, 100, 100);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, w->img_ptr, 0, 0);
 }

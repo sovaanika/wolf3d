@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:47:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/26 20:38:05 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/30 18:10:56 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int		key_press(int key, void *param)
 	w = (t_wolf *)param;
 	if (key == 53)
 		exit(EXIT_SUCCESS);
+	else if (key == 123 || key == 124)
+		rotate(key, w);
+	else if (key == 126 || key == 125)
+		movement(key, w);
 	return (0);
 }
 
@@ -34,6 +38,12 @@ void	init(t_wolf *w)
 	w->wid = 1200;
 	w->textusz = 1;
 	w->hei = 1200;
+	w->pos.x = 2;
+	w->pos.y = 2;
+	w->dir.x = 1;
+	w->dir.y = 0;
+	w->plane.x = 0;
+	w->plane.y = 0.6;
 	w->win_ptr = mlx_new_window(w->mlx_ptr, w->wid, w->hei, "wolf");
 	w->img_ptr = mlx_new_image(w->mlx_ptr, w->wid, w->hei);
 	w->data = (int *)mlx_get_data_addr(w->img_ptr, &w->bpp,
@@ -52,11 +62,11 @@ int		main(int argc, char **argv)
 		w = (t_wolf *)malloc(sizeof(*w));
 		init(w);
 		validation(w, fd);
-		//line_dda(40, 36, 756, w);
-		//draw(w);
-		raycast(w);
-		mlx_key_hook(w->win_ptr, key_press, (void *)w);
+		draw(w);
+		//mlx_key_hook(w->win_ptr, key_press, (void *)w);
 		mlx_hook(w->win_ptr, 17, 0, ft_close, (void *)0);
+		mlx_do_key_autorepeaton(w->mlx_ptr);
+		mlx_hook(w->win_ptr, 2, (1L << 0), key_press, (void *)w);
 		mlx_loop(w->mlx_ptr);
 	}
 }

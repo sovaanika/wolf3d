@@ -1,5 +1,5 @@
 NAME = wolf3d
-SRC = ./srcs/dda.c ./srcs/main.c ./srcs/raycaster.c ./srcs/validation.c
+SRC = ./srcs/dda.c ./srcs/main.c ./srcs/raycaster.c ./srcs/validation.c ./srcs/draw.c ./srcs/keyfunctions.c
 INC = wolf.h
 LIBFTFOLDER = ./libft
 LIBFTINC = -I ./libft -L ./libft -lft

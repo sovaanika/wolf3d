@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 18:34:52 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/25 17:28:34 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/01 15:20:20 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_direction
 	double		y;
 	double		rayx;
 	double		rayy;
+	double		oldx;
 }				t_direction;
 
 typedef struct	s_position
@@ -48,6 +49,7 @@ typedef struct	s_position
 typedef struct	s_plane
 {
 	double		x;
+	double		oldx;
 	double		y;
 }				t_plane;
 
@@ -125,6 +127,11 @@ typedef struct	s_wolf
 	int			linehei;
 	int			drwstrt;
 	int			drwend;
+	double		rotspd;
+	void		*txtrn;
+	void		*txtrs;
+	void		*txtrw;
+	void		*txtre;
 }				t_wolf;
 
 void			init(t_wolf *w);
@@ -137,6 +144,8 @@ void			draw(t_wolf *w);
 void			putcords(t_wolf *w);
 void			line_dda(int x, int drawstart, int drawend, t_wolf *w);
 void			raycast(t_wolf *w);
-void			bresenham(t_wolf *w, double *x, double *y);
+void			rotate(int key, t_wolf *w);
+void			movement(int key, t_wolf *w);
+void			draw(t_wolf *w);
 
 #endif

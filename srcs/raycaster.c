@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 18:30:25 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/26 20:17:08 by bbear            ###   ########.fr       */
+/*   Updated: 2019/04/30 16:00:21 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ void	raycast(t_wolf *w)
 	int		x;
 
 	x = -1;
-	w->pos.x = 1;
-	w->pos.y = 1;
-	w->dir.x = 1;
-	w->dir.y = 0;
-	w->plane.x = 0;
-	w->plane.y = 0.66;
 	while (++x < w->wid)
 	{
 		w->cam.x = 2 * (double)x / w->wid - 1;
@@ -85,6 +79,5 @@ void	raycast(t_wolf *w)
 		if (w->drwend >= w->hei)
 			w->drwend = w->hei - 1;
 		line_dda(x, w->drwstrt, w->drwend, w);
-		//bresenham(w,xm,y);
 	}
 }

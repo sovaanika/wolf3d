@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:04:13 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/26 20:41:55 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/01 15:16:15 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	line_dda(int x, int drawstart, int drawend, t_wolf *w)
 			w->data[(int)w->d.x + (int)w->d.y * w->wid] = w->map[w->mapy][w->mapx].color;//w->map[(int)w->d.iy1][(int)w->d.ix1].color;
 		}
 	}
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, w->img_ptr, 0, 0);
 }
 
 // void	line_dda(t_wolf *w)
