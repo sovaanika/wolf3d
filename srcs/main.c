@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:47:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/04/30 18:10:56 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/05 16:32:08 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int		main(int argc, char **argv)
 		//here will be true validation
 		w = (t_wolf *)malloc(sizeof(*w));
 		init(w);
-		validation(w, fd);
+
+		validation(w, fd);textureread(w);
 		draw(w);
 		//mlx_key_hook(w->win_ptr, key_press, (void *)w);
 		mlx_hook(w->win_ptr, 17, 0, ft_close, (void *)0);
