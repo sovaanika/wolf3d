@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 18:34:52 by bbear             #+#    #+#             */
-/*   Updated: 2019/05/05 16:39:04 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/13 18:59:41 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,11 @@ typedef struct	s_wolf
 	int			drwend;
 	double		rotspd;
 	void		*txtrn;
+	void		*ttxtrs;
 	int			*txtrs;
 	void		*txtrw;
 	int			*txtre;
+	int			num;
 }				t_wolf;
 
 void			init(t_wolf *w);
@@ -149,5 +151,6 @@ void			rotate(int key, t_wolf *w);
 void			movement(int key, t_wolf *w);
 void			draw(t_wolf *w);
 void			textureread(t_wolf *w);
+void			test(t_wolf *w);
 
 #endif

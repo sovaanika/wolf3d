@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:04:13 by bbear             #+#    #+#             */
-/*   Updated: 2019/05/05 18:30:49 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/13 19:01:19 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	line_dda(int x, int drawstart, int drawend, t_wolf *w)
 				w->data[(int)w->d.x + (int)w->d.y * w->wid] = w->map[w->mapy][w->mapx].color;
 			else
 			{
-				w->data[(int)w->d.x + (int)w->d.y * w->wid] = w->txtrs[i] + w->txtrs[i + 1] * 256 + w->txtrs[i + 2] * 256 * 256;
-				i += 4;
+				if (i == 64)
+					i = 0;
+				w->data[(int)w->d.x + (int)w->d.y * w->wid] = w->txtrs[w->num * 64 + i];// * 256 * 256 + w->txtrs[i + 1] * 256 + w->txtrs[i + 2];
+				i++;//= 3;
 			}
 		}
 	}

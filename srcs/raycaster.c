@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 18:30:25 by bbear             #+#    #+#             */
-/*   Updated: 2019/05/02 18:24:43 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/13 19:01:28 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	raycast(t_wolf *w)
 	int		x;
 
 	x = -1;
+	w->num = 0;
 	while (++x < w->wid)
 	{
 		w->cam.x = 2 * (double)x / w->wid - 1;
@@ -78,6 +79,10 @@ void	raycast(t_wolf *w)
 		w->drwend = w->linehei / 2 + w->hei / 2;
 		if (w->drwend >= w->hei)
 			w->drwend = w->hei - 1;
+		if (w->num == 64)
+			w->num = 0;
 		line_dda(x, w->drwstrt, w->drwend, w);
+		if (w->hit == 1)
+			w->num++;
 	}
 }

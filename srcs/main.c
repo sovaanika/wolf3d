@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:47:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/05/05 16:32:08 by bbear            ###   ########.fr       */
+/*   Updated: 2019/05/13 17:36:23 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		main(int argc, char **argv)
 		init(w);
 
 		validation(w, fd);textureread(w);
+		//test(w);
 		draw(w);
 		//mlx_key_hook(w->win_ptr, key_press, (void *)w);
 		mlx_hook(w->win_ptr, 17, 0, ft_close, (void *)0);
